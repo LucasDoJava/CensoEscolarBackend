@@ -14,7 +14,7 @@ Este projeto tem como objetivo gerenciar e disponibilizar dados do Censo Escolar
 
 ## 🌐 Link do Projeto (Front-end)
 
-🔗 [Acesse o Front-end do Projeto](LINK)
+🔗 [Acesse o Front-end do Projeto](https://github.com/LucasDoJava/CensoEscolarFrontend/tree/Lucas-Emanuel)
 
 ---
 
@@ -28,7 +28,7 @@ Este projeto tem como objetivo gerenciar e disponibilizar dados do Censo Escolar
 ## 🚀 Tecnologias Utilizadas
 
 - **Backend**: Python (Flask, SQLAlchemy, PostgreSQL)  
-- **Frontend**: React.js   
+- **Frontend**: React.js 
 - **Banco de Dados**: PostgreSQL  
 
 ---
@@ -37,15 +37,15 @@ Este projeto tem como objetivo gerenciar e disponibilizar dados do Censo Escolar
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git
+git clone https://github.com/LucasDoJava/CensoEscolarBackend.git
 
 # Entrar na pasta do projeto
-cd NOME_DO_REPOSITORIO
+cd CensoEscolarBackend
 
-# (Caso tenha backend) Instalar dependências
+# (Backend) Instalar dependências
 pip install -r requirements.txt
 
-# (Caso tenha frontend) Instalar dependências
+# (Frontend) Instalar dependências
 npm install
 
 # Rodar o backend
