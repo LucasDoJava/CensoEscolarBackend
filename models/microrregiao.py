@@ -2,7 +2,7 @@ from __future__ import annotations
 from sqlalchemy import String, Integer, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List, TYPE_CHECKING
-from Helpers.database import db
+from helpers.database import db
 from flask_restful import fields as flaskFields
 
 if TYPE_CHECKING:
@@ -20,7 +20,7 @@ class tb_microrregiao(db.Model):
     microrregiao: Mapped[str] = mapped_column('microrregiao', String)
 
     
-    instituicoes: Mapped[tb_instituicao] = relationship("tb_instituicao", back_populates="microrregioes")
+    instituicoes: Mapped[tb_instituicao] = relationship("tb_instituicao", back_populates="microrregiao")
 
     def __init__(self, codmicrorregiao: int, microrregiao: str):
         self.codmicrorregiao = codmicrorregiao

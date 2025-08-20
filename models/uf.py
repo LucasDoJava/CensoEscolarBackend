@@ -2,7 +2,7 @@ from __future__ import annotations
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List, TYPE_CHECKING
-from Helpers.database import db
+from helpers.database import db
 from flask_restful import fields as flaskFields
 
 if TYPE_CHECKING:
@@ -28,8 +28,9 @@ class tb_uf(db.Model):
         cascade="all, delete-orphan"
     )
 
-    def __init__(self, coduf: int, nomeestado: str):
+    def __init__(self, coduf: int, uf: str, nomeestado: str):
         self.coduf = coduf
+        self.uf = uf
         self.nomeestado = nomeestado
 
     def __repr__(self):

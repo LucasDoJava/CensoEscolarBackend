@@ -2,7 +2,7 @@ from __future__ import annotations
 from sqlalchemy import Integer, String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List, TYPE_CHECKING
-from Helpers.database import db
+from helpers.database import db
 from flask_restful import fields as flaskFields
 
 if TYPE_CHECKING:
