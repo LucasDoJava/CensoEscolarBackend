@@ -37,7 +37,7 @@ class tb_instituicao(db.Model):
     regiao: Mapped[str] = mapped_column(String)
     codregiao: Mapped[int] = mapped_column(Integer) 
 
-    uf_nome: Mapped[str] = mapped_column("uf", String)  # sigla da UF
+    uf_nome: Mapped[str] = mapped_column("uf", String)  
     coduf: Mapped[int] = mapped_column(ForeignKey('tb_uf.coduf'))
 
     municipio_nome: Mapped[str] = mapped_column("municipio", String)
@@ -54,7 +54,7 @@ class tb_instituicao(db.Model):
     ano: Mapped[int] = mapped_column(Integer)
     created: Mapped[datetime] = mapped_column(DateTime, server_default=db.func.now())
 
-    # relacionamentos
+    
     municipio_rel: Mapped[tb_municipio] = relationship("tb_municipio", back_populates="instituicoes")
     uf_rel: Mapped[tb_uf] = relationship("tb_uf", back_populates="instituicoes")
     mesorregiao_rel: Mapped[tb_mesorregiao] = relationship("tb_mesorregiao", back_populates="instituicoes")

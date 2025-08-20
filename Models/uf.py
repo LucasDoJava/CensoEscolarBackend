@@ -24,13 +24,14 @@ class tb_uf(db.Model):
     
     instituicoes: Mapped[List[tb_instituicao]] = relationship(
         "tb_instituicao", 
-        back_populates="uf",
+        back_populates="uf_rel",
         cascade="all, delete-orphan"
     )
 
-    def __init__(self, coduf: int, nomeestado: str):
-        self.coduf = coduf
-        self.nomeestado = nomeestado
+    def __init__(self, coduf: int, uf: str, nomeestado: str):
+     self.coduf = coduf
+     self.uf = uf
+     self.nomeestado = nomeestado
 
     def __repr__(self):
         return f"tb_uf(cod={self.coduf}, nome={self.nomeestado})"

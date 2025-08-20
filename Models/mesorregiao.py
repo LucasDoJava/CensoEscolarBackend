@@ -19,7 +19,7 @@ class tb_mesorregiao(db.Model):
     codmesorregiao: Mapped[int] = mapped_column('codmesorregiao', Integer, primary_key=True)
     mesorregiao: Mapped[str] = mapped_column('mesorregiao', String)
     
-    instituicoes: Mapped[List[tb_instituicao]] = relationship("tb_instituicao", back_populates="mesorregiao", cascade="all, delete-orphan"
+    instituicoes: Mapped[List[tb_instituicao]] = relationship("tb_instituicao", back_populates="mesorregiao_rel", cascade="all, delete-orphan"
     )
 
     def __init__(self, codmesorregiao: int, mesorregiao: str):

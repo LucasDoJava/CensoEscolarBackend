@@ -20,7 +20,7 @@ class tb_microrregiao(db.Model):
     microrregiao: Mapped[str] = mapped_column('microrregiao', String)
 
     
-    instituicoes: Mapped[tb_instituicao] = relationship("tb_instituicao", back_populates="microrregioes")
+    instituicoes: Mapped[tb_instituicao] = relationship("tb_instituicao", back_populates="microrregiao_rel")
 
     def __init__(self, codmicrorregiao: int, microrregiao: str):
         self.codmicrorregiao = codmicrorregiao
