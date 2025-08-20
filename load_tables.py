@@ -11,12 +11,11 @@ from app import app
 
 DATA_DIR = r"C:\Users\Lucas\Documents\DadosCensoEscolar"
 
-# Adicione esta função auxiliar no início do arquivo
 def safe_int(value, default=0):
     try:
         if pd.isna(value) or value == '':
             return default
-        return int(float(value))  # Converte primeiro para float para tratar números decimais
+        return int(float(value))  
     except (ValueError, TypeError):
         return default
 
@@ -25,13 +24,13 @@ def load_tables():
         session: Session = db.session
 
 
-        # Dicionários para armazenar dados únicos
+        
         ufs = {}
         mesorregioes = {}
         microrregioes = {}
         municipios = {}
 
-        # Primeira passada: coletar dados únicos das tabelas de referência
+        
         for arquivo in os.listdir(DATA_DIR):
             if arquivo.endswith(".csv"):
                 caminho = os.path.join(DATA_DIR, arquivo)
@@ -41,7 +40,7 @@ def load_tables():
 
                 for _, row in df.iterrows():
                     try:
-                        # Coletar UFs únicas - nomes de colunas comuns do Censo
+                        
                         coduf = row.get('CO_UF', row.get('coduf', 0))
                         uf_sigla = row.get('SG_UF', row.get('uf', ''))
                         uf_nome = row.get('NO_UF', row.get('nomeestado', ''))
@@ -55,7 +54,7 @@ def load_tables():
                                     nomeestado=str(uf_nome)
                                 )
 
-                        # Coletar mesorregiões únicas
+                        
                         codmeso = row.get('CO_MESORREGIAO', row.get('codmesorregiao', 0))
                         meso_nome = row.get('NO_MESORREGIAO', row.get('mesorregiao', ''))
                         if codmeso and meso_nome:
@@ -66,7 +65,7 @@ def load_tables():
                                     mesorregiao=str(meso_nome)
                                 )
 
-                        # Coletar microrregiões únicas
+                        
                         codmicro = row.get('CO_MICRORREGIAO', row.get('codmicrorregiao', 0))
                         micro_nome = row.get('NO_MICRORREGIAO', row.get('microrregiao', ''))
                         if codmicro and micro_nome:
@@ -77,7 +76,7 @@ def load_tables():
                                     microrregiao=str(micro_nome)
                                 )
 
-                        # Coletar municípios únicos
+                        
                         codmunicipio = row.get('CO_MUNICIPIO', row.get('codmunicipio', 0))
                         municipio_nome = row.get('NO_MUNICIPIO', row.get('municipio', ''))
                         if codmunicipio and municipio_nome:
@@ -92,7 +91,7 @@ def load_tables():
                         print(f"Erro ao processar linha: {e}")
                         continue
 
-        # Inserir dados de referência no banco
+        
         print("Inserindo UFs...")
         for uf in ufs.values():
             session.merge(uf)
@@ -112,7 +111,7 @@ def load_tables():
         session.commit()
         print("Dados de referência inseridos com sucesso!")
 
-        # Segunda passada: inserir instituições
+        
         for arquivo in os.listdir(DATA_DIR):
             if arquivo.endswith(".csv"):
                 caminho = os.path.join(DATA_DIR, arquivo)
