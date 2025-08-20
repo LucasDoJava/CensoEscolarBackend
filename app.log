@@ -1,0 +1,107 @@
+2025-08-20 11:06:45,292 - INFO - Get - Instituições por ano
+2025-08-20 11:06:45,473 - INFO - Instituições do ano 2019 retornadas com sucesso
+2025-08-20 13:40:22,819 - INFO - Get - Instituições por ano
+2025-08-20 13:40:22,910 - INFO - Instituições do ano 2019 retornadas com sucesso
+2025-08-20 13:40:54,464 - INFO - Get - Instituições por ano
+2025-08-20 13:40:54,522 - INFO - Instituições do ano 2023 retornadas com sucesso
+2025-08-20 13:42:24,395 - INFO - Get - Instituição por ano 2023 e código de entidade: 13097237
+2025-08-20 13:42:24,403 - INFO - Instituição com ano 2023 e codigo 13097237 retornada com sucesso
+2025-08-20 13:44:06,178 - INFO - Post - Instituição
+2025-08-20 13:44:06,179 - WARNING - Erro(s) na validação ao inserir nova instituição: 
+	{'uf_nome': ['Length must be between 4 and 50.'], 'matriculas_base': ['O valor deve ser um número inteiro positivo.']}
+2025-08-20 13:47:00,876 - INFO - Post - Instituição
+2025-08-20 13:47:01,049 - ERROR - Exception SQLAlchemy ao inserir nova instituição.:
+	Traceback (most recent call last):
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+	    self.dialect.do_execute(
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+	    cursor.execute(statement, parameters)
+	psycopg2.errors.NumericValueOutOfRange: ERRO:  inteiro fora do intervalo
+	
+	
+	The above exception was the direct cause of the following exception:
+	
+	Traceback (most recent call last):
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Resources\InstituicaoResource.py", line 50, in post
+	    db.session.commit()
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\orm\scoping.py", line 599, in commit
+	    return self._proxied.commit()
+	           ^^^^^^^^^^^^^^^^^^^^^^
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\orm\session.py", line 2032, in commit
+	    trans.commit(_to_root=True)
+	  File "<string>", line 2, in commit
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+	    ret_value = fn(self, *arg, **kw)
+	                ^^^^^^^^^^^^^^^^^^^^
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\orm\session.py", line 1313, in commit
+	    self._prepare_impl()
+	  File "<string>", line 2, in _prepare_impl
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+	    ret_value = fn(self, *arg, **kw)
+	                ^^^^^^^^^^^^^^^^^^^^
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\orm\session.py", line 1288, in _prepare_impl
+	    self.session.flush()
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\orm\session.py", line 4345, in flush
+	    self._flush(objects)
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\orm\session.py", line 4480, in _flush
+	    with util.safe_reraise():
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+	    raise exc_value.with_traceback(exc_tb)
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\orm\session.py", line 4441, in _flush
+	    flush_context.execute()
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+	    rec.execute(self)
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+	    util.preloaded.orm_persistence.save_obj(
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+	    _emit_insert_statements(
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1233, in _emit_insert_statements
+	    result = connection.execute(
+	             ^^^^^^^^^^^^^^^^^^^
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+	    return meth(
+	           ^^^^^
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+	    return connection._execute_clauseelement(
+	           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+	    ret = self._execute_context(
+	          ^^^^^^^^^^^^^^^^^^^^^^
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+	    return self._exec_single_context(
+	           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+	    self._handle_dbapi_exception(
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+	    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+	    self.dialect.do_execute(
+	  File "C:\Users\Lucas\Documents\ProjetoCensoEscolar\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+	    cursor.execute(statement, parameters)
+	sqlalchemy.exc.DataError: (psycopg2.errors.NumericValueOutOfRange) ERRO:  inteiro fora do intervalo
+	
+	[SQL: INSERT INTO tb_instituicao (codentidade, regiao, codregiao, uf, coduf, municipio, codmunicipio, mesorregiao, codmesorregiao, microrregiao, codmicrorregiao, entidade, matriculas_base, ano) VALUES (%(codentidade)s, %(regiao)s, %(codregiao)s, %(uf)s, %(coduf)s, %(municipio)s, %(codmunicipio)s, %(mesorregiao)s, %(codmesorregiao)s, %(microrregiao)s, %(codmicrorregiao)s, %(entidade)s, %(matriculas_base)s, %(ano)s) RETURNING tb_instituicao.created]
+	[parameters: {'codentidade': 130972535637, 'regiao': 'Norte', 'codregiao': 1, 'uf': 'Acre', 'coduf': 13, 'municipio': 'Nhamundá', 'codmunicipio': 1303007, 'mesorregiao': 'Centro Amazonense', 'codmesorregiao': 1303, 'microrregiao': 'Parintins', 'codmicrorregiao': 13010, 'entidade': 'ESC SAO PEDRO', 'matriculas_base': 400, 'ano': 2023}]
+	(Background on this error at: https://sqlalche.me/e/20/9h9h)
+	
+2025-08-20 13:47:56,738 - INFO - Post - Instituição
+2025-08-20 13:47:56,780 - INFO - Nova instituição com codigo 1309637 cadastrada com sucesso
+2025-08-20 13:48:57,740 - INFO - Put - Tentativa de atualizar instituição com ano 2023 e código: 1309637
+2025-08-20 13:48:57,748 - INFO - Instituição com ano 2023 e código 1309637 atualizada com sucesso.
+2025-08-20 13:49:06,701 - INFO - Get - Instituição por ano 2023 e código de entidade: 1309637
+2025-08-20 13:49:06,706 - INFO - Instituição com ano 2023 e codigo 1309637 retornada com sucesso
+2025-08-20 13:49:17,181 - INFO - Delete - Tentativa de deleção da instituição com código: 1309637
+2025-08-20 13:49:17,191 - INFO - Instituição com ano 2023 e código 1309637 removida com sucesso.
+2025-08-20 13:49:22,076 - INFO - Get - Instituição por ano 2023 e código de entidade: 1309637
+2025-08-20 13:49:22,079 - WARNING - Instituição com ano 2023 e código 1309637 não encontrada.
+2025-08-20 14:59:31,862 - INFO - Get - Instituição por ano 2023 e código de entidade: 1309637
+2025-08-20 14:59:31,959 - WARNING - Instituição com ano 2023 e código 1309637 não encontrada.
+2025-08-20 14:59:37,052 - INFO - Get - Instituições por ano
+2025-08-20 14:59:37,133 - INFO - Instituições do ano 2023 retornadas com sucesso
+2025-08-20 14:59:58,319 - INFO - Post - Instituição
+2025-08-20 14:59:58,331 - WARNING - Erro(s) na validação ao inserir nova instituição: 
+	{'sigla': ['Sigla é obrigatória.']}
+2025-08-20 15:00:32,525 - INFO - Post - Instituição
+2025-08-20 15:00:32,541 - INFO - Nova instituição com codigo 1309637 cadastrada com sucesso
+2025-08-20 15:00:52,411 - INFO - Delete - Tentativa de deleção da instituição com código: 1309637
+2025-08-20 15:00:52,419 - INFO - Instituição com ano 2023 e código 1309637 removida com sucesso.

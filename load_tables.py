@@ -83,7 +83,7 @@ def load_tables():
                             municipio_key = (codmunicipio, municipio_nome)
                             if municipio_key not in municipios:
                                 municipios[municipio_key] = tb_municipio(
-                                    idmunicipio=int(codmunicipio),
+                                    codmunicipio=int(codmunicipio),
                                     nome_municipio=str(municipio_nome)
                                 )
 
@@ -124,7 +124,8 @@ def load_tables():
                         inst = tb_instituicao(
                             regiao=str(row.get('NO_REGIAO', row.get('regiao', ''))),
                             codregiao=safe_int(row.get('CO_REGIAO', row.get('codregiao', 0))),
-                            uf_nome=str(row.get('SG_UF', row.get('uf', ''))),
+                            sigla=str(row.get('SG_UF', row.get('uf', ''))),
+                            uf_nome=str(row.get('NO_UF', row.get('nomeestado', ''))),
                             coduf=safe_int(row.get('CO_UF', row.get('coduf', 0))),
                             municipio_nome=str(row.get('NO_MUNICIPIO', row.get('municipio', ''))),
                             codmunicipio=safe_int(row.get('CO_MUNICIPIO', row.get('codmunicipio', 0))),
