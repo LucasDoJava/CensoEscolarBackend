@@ -70,3 +70,52 @@ class MatriculasPorRegiaoResource(Resource):
         except Exception:
             log_exception("Erro inesperado ao consultar matrículas por Região")
             abort(500, description="Ocorreu um erro inesperado.")
+
+class MatriculasResource(Resource):
+    def get(self):
+        logger.info("Get - Matrículas paginadas")
+
+        try:
+            page = int(request.args.get('page', 1))
+            per_page = int(request.args.get('per_page', 100))
+        except ValueError:
+            return {"mensagem": "Parâmetros de paginação inválidos."}, 400
+
+        try:
+            query = db.session.execute(
+                db.select(
+                    tb_instituicao.entidade,
+                    tb_instituicao.ano,
+                    tb_instituicao.matriculas_base,
+                    tb_instituicao.sigla,
+                    tb_instituicao.municipio_nome
+                )
+                .offset((page - 1) * per_page)
+                .limit(per_page)
+            ).all()
+
+            dados = [
+                {
+                    "entidade": entidade,
+                    "ano": ano,
+                    "matriculas_base": matriculas,
+                    "sigla": sigla,
+                    "municipio": municipio
+                }
+                for entidade, ano, matriculas, sigla, municipio in query
+            ]
+
+            logger.info(f"Matrículas paginadas retornadas com sucesso (página {page})")
+            return {
+                "page": page,
+                "per_page": per_page,
+                "dados": dados
+            }, 200
+
+        except SQLAlchemyError:
+            log_exception("Exception SQLAlchemy ao listar matrículas.")
+            db.session.rollback()
+            abort(500, description="Problema com o banco de dados.")
+        except Exception:
+            log_exception("Erro inesperado ao listar matrículas")
+            abort(500, description="Ocorreu um erro inesperado.")
