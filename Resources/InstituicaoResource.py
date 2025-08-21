@@ -16,14 +16,23 @@ class InstituicoesResouce(Resource):
 
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 100))
+        sigla = request.args.get('sigla')  # <- UF opcional (ex.: AM, SP, PB)
 
         try:
-            instituicoes = db.session.execute(
-                db.select(tb_instituicao)
-                .filter_by(ano=ano)
-                .offset((page - 1) * per_page)
-                .limit(per_page)
-            ).scalars().all()
+            # monta a query base por ano
+            query = db.select(tb_instituicao).filter_by(ano=ano)
+
+            # aplica filtro por UF, se enviado
+            if sigla:
+                query = query.filter_by(sigla=sigla)
+
+            instituicoes = (
+                db.session.execute(
+                    query.offset((page - 1) * per_page).limit(per_page)
+                )
+                .scalars()
+                .all()
+            )
 
             logger.info(f"Instituições do ano {ano} retornadas com sucesso")
             return marshal(instituicoes, tb_instituicao_fields), 200
@@ -35,6 +44,7 @@ class InstituicoesResouce(Resource):
         except Exception:
             log_exception("Erro inesperado ao listar instituições")
             abort(500, description="Ocorreu um erro inesperado.")
+
 
 class NovaInstituicaoResouce(Resource):
     def post(self):

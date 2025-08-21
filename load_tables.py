@@ -9,7 +9,7 @@ from Models.microrregiao import tb_microrregiao
 from Models.municipio import tb_municipio
 from app import app  
 
-DATA_DIR = r"C:\Users\Lucas\Documents\DadosCensoEscolar"
+DATA_DIR = r"C:\Users\luanx\Documents\DadosCensoEscolar"
 
 def safe_int(value, default=0):
     try:

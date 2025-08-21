@@ -105,3 +105,27 @@
 2025-08-20 15:00:32,541 - INFO - Nova instituição com codigo 1309637 cadastrada com sucesso
 2025-08-20 15:00:52,411 - INFO - Delete - Tentativa de deleção da instituição com código: 1309637
 2025-08-20 15:00:52,419 - INFO - Instituição com ano 2023 e código 1309637 removida com sucesso.
+2025-08-20 21:42:37,567 - INFO - Get - Todas as UFs
+2025-08-20 21:42:37,623 - INFO - Ufs retornadas com sucesso
+2025-08-20 21:42:37,814 - INFO - Get - Todas as messorregioes
+2025-08-20 21:42:37,817 - INFO - Mesorregioes retornadas com sucesso
+2025-08-20 21:42:37,940 - INFO - Get - Todas as microrregioes
+2025-08-20 21:42:37,946 - INFO - Microrregioes retornadas com sucesso
+2025-08-20 21:42:38,140 - INFO - Get - Todas os municipios
+2025-08-20 21:42:38,145 - INFO - Municipios retornadas com sucesso
+2025-08-20 21:42:38,265 - INFO - Get - Todas os municipios
+2025-08-20 21:42:38,269 - INFO - Municipios retornadas com sucesso
+2025-08-20 21:42:38,466 - INFO - Get - Todas os municipios
+2025-08-20 21:42:38,470 - INFO - Municipios retornadas com sucesso
+2025-08-20 21:42:38,590 - INFO - Get - Todas os municipios
+2025-08-20 21:42:38,594 - INFO - Municipios retornadas com sucesso
+2025-08-20 21:42:38,792 - INFO - Get - Todas os municipios
+2025-08-20 21:42:38,796 - INFO - Municipios retornadas com sucesso
+2025-08-20 21:42:38,916 - INFO - Get - Todas os municipios
+2025-08-20 21:42:38,919 - INFO - Municipios retornadas com sucesso
+2025-08-20 21:42:54,024 - INFO - Get - Todas as UFs
+2025-08-20 21:42:54,025 - INFO - Ufs retornadas com sucesso
+2025-08-20 21:43:02,771 - INFO - Get - Todas as UFs
+2025-08-20 21:43:02,772 - INFO - Ufs retornadas com sucesso
+2025-08-20 21:43:12,496 - INFO - Get - Todas as UFs
+2025-08-20 21:43:12,498 - INFO - Ufs retornadas com sucesso

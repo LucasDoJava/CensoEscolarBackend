@@ -1,8 +1,8 @@
-"""Criando as tabelas
+"""initial
 
-Revision ID: 02c6fb64df67
+Revision ID: 74fad3ba1d80
 Revises: 
-Create Date: 2025-08-20 14:20:05.991683
+Create Date: 2025-08-20 20:44:48.994095
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '02c6fb64df67'
+revision = '74fad3ba1d80'
 down_revision = None
 branch_labels = None
 depends_on = None
