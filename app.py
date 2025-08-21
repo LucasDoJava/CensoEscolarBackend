@@ -11,7 +11,7 @@ from Resources.MesorregiaoResource import MesorregioesResouce, MesorregiaoResour
 from Resources.MicrorregiaoResource import MicrorregioesResouce, MicrorregiaoResource
 from Resources.MunicipioResource import MunicipiosResouce, MunicipioResource
 
-from Resources.MatriculaResource import MatriculasPorRegiaoResource, MatriculasPorUFResource
+from Resources.MatriculaResource import MatriculasPorRegiaoResource, MatriculasPorUFResource, MatriculasResource
 
 cors.init_app(app)
 
@@ -33,3 +33,5 @@ api.add_resource(InstituicaoResouce, '/instituicoes/<int:ano>/<int:codentidade>'
 
 api.add_resource(MatriculasPorUFResource, "/instituicoes/<int:ano>/matriculas/uf")
 api.add_resource(MatriculasPorRegiaoResource, "/instituicoes/<int:ano>/matriculas/regiao")
+
+api.add_resource(MatriculasResource, "/matriculas")
