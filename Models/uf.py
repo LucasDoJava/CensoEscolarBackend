@@ -28,8 +28,9 @@ class tb_uf(db.Model):
         cascade="all, delete-orphan"
     )
 
-    def __init__(self, coduf: int, nomeestado: str):
+    def __init__(self, coduf: int, uf: str, nomeestado: str):
         self.coduf = coduf
+        self.uf = uf
         self.nomeestado = nomeestado
 
     def __repr__(self):
