@@ -1,14 +1,15 @@
 from flask import request, abort
 from flask_restful import Resource, marshal
-
 from sqlalchemy.exc import SQLAlchemyError
 
 from Helpers.database import db
 from Helpers.Logging import logger, log_exception 
+from Helpers.app import cache  
 
 from Models.microrregiao import tb_microrregiao_fields, tb_microrregiao
 
 class MicrorregioesResouce(Resource):
+    @cache.cached(timeout=3600, query_string=True)  
     def get(self):
         logger.info(f"Get - Todas as microrregioes")
         
@@ -20,7 +21,7 @@ class MicrorregioesResouce(Resource):
                 db.select(tb_microrregiao)
                 .offset((page - 1) * per_page)
                 .limit(per_page)
-                ).scalars().all()
+            ).scalars().all()
 
             logger.info(f"Microrregioes retornadas com sucesso")
             return marshal(microrregioes, tb_microrregiao_fields), 200
@@ -43,6 +44,10 @@ class MicrorregioesResouce(Resource):
             db.session.add(nova_microrregiao)
             db.session.commit()
 
+            
+            cache.delete_memoized(MicrorregioesResouce.get)
+            logger.info(f"Cache invalidado após inserção de nova microrregiao")
+
             logger.info(f"Nova microrregiao com codigo {nova_microrregiao.codmicrorregiao} cadastrada com sucesso")
             return marshal(nova_microrregiao, tb_microrregiao_fields), 201
         
@@ -55,6 +60,7 @@ class MicrorregioesResouce(Resource):
             abort(500, description="Ocorreu um erro inesperado.")
 
 class MicrorregiaoResource(Resource):
+    @cache.cached(timeout=3600, query_string=True)  
     def get(self, codmicrorregiao):
         logger.info(f"Get - Microrregiao por código: {codmicrorregiao}")
 
@@ -98,6 +104,11 @@ class MicrorregiaoResource(Resource):
 
             db.session.commit()
 
+            
+            cache.delete_memoized(MicrorregioesResouce.get)
+            cache.delete_memoized(MicrorregiaoResource.get, codmicrorregiao)
+            logger.info(f"Caches invalidados após atualização da microrregiao {codmicrorregiao}")
+
             logger.info(f"Microrregiao com código {codmicrorregiao} atualizada com sucesso.")
             return {"mensagem": "Microrregiao atualizada com sucesso."}, 200
         
@@ -124,6 +135,11 @@ class MicrorregiaoResource(Resource):
             
             db.session.delete(microrregiao)
             db.session.commit()
+
+           
+            cache.delete_memoized(MicrorregioesResouce.get)
+            cache.delete_memoized(MicrorregiaoResource.get, codmicrorregiao)
+            logger.info(f"Caches invalidados após deleção da microrregiao {codmicrorregiao}")
 
             logger.info(f"Microrregiao com código {codmicrorregiao} removida com sucesso.")
             return {"mensagem": "Microrregiao removida com sucesso."}, 200

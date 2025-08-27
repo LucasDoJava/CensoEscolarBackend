@@ -2,17 +2,18 @@ from flask import request, abort
 from flask_restful import Resource, marshal
 from datetime import datetime
 
-
 from marshmallow import ValidationError
 from sqlalchemy.exc import SQLAlchemyError
 
 from Helpers.database import db
 from Helpers.Logging import logger, log_exception 
+from Helpers.app import cache
 
 from Models.instituicao import tb_instituicao_fields, tb_instituicao, InstituicaoEnsinoSchema
 
 
 class InstituicoesResouce(Resource):
+    @cache.cached(timeout=3600, query_string=True)
     def get(self, ano):
         logger.info("Get - Instituições por ano")
 
@@ -66,8 +67,8 @@ class NovaInstituicaoResouce(Resource):
             abort(500, description="Ocorreu um erro inesperado.")
 
 
-
 class InstituicaoResouce(Resource):
+    @cache.cached(timeout=3600, query_string=True)
     def get(self, ano, codentidade):
         logger.info(f"Get - Instituição por ano {ano} e código de entidade: {codentidade}")
 

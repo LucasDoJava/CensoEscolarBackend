@@ -6,9 +6,11 @@ from sqlalchemy import func
 from Helpers.database import db
 from Helpers.Logging import logger, log_exception
 from Models.instituicao import tb_instituicao
+from Helpers.app import cache
 
 
 class MatriculasPorUFResource(Resource):
+    @cache.cached(timeout=3600, query_string=True)
     def get(self, ano):
         logger.info(f"Get - Matrículas por UF no ano {ano}")
 
@@ -41,6 +43,7 @@ class MatriculasPorUFResource(Resource):
 
 
 class MatriculasPorRegiaoResource(Resource):
+    @cache.cached(timeout=3600, query_string=True)
     def get(self, ano):
         logger.info(f"Get - Matrículas por Região no ano {ano}")
 

@@ -15,7 +15,6 @@ from Resources.MunicipioResource import MunicipiosResouce, MunicipioResource
 
 from Resources.MatriculaResource import MatriculasPorRegiaoResource, MatriculasPorUFResource
 
-cors.init_app(app)
 
 api.add_resource(UfsResouce, '/ufs')
 api.add_resource(UfResource, '/uf/<int:coduf>')

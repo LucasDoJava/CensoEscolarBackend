@@ -1,36 +1,37 @@
 from flask import request, abort
 from flask_restful import Resource, marshal
-
 from sqlalchemy.exc import SQLAlchemyError
 
 from Helpers.database import db
 from Helpers.Logging import logger, log_exception 
+from Helpers.app import cache  
 
 from Models.mesorregiao import tb_mesorregiao_fields, tb_mesorregiao
 
 class MesorregioesResouce(Resource):
+    @cache.cached(timeout=3600, query_string=True)  
     def get(self):
-        logger.info(f"Get - Todas as messorregioes")
+        logger.info(f"Get - Todas as mesorregioes")
         
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 22))
 
         try:
-            mesorregiao = db.session.execute(
+            mesorregioes = db.session.execute(
                 db.select(tb_mesorregiao)
                 .offset((page - 1) * per_page)
                 .limit(per_page)
-                ).scalars().all()
+            ).scalars().all()
 
             logger.info(f"Mesorregioes retornadas com sucesso")
-            return marshal(mesorregiao, tb_mesorregiao_fields), 200
+            return marshal(mesorregioes, tb_mesorregiao_fields), 200
 
         except SQLAlchemyError:
-            log_exception("Exception SQLAlchemy ao buscar messorregioes.")
+            log_exception("Exception SQLAlchemy ao buscar mesorregioes.")
             db.session.rollback()
             abort(500, description="Problema com o banco de dados.")
         except Exception:
-            log_exception("Erro inesperado ao buscar messorregioes")
+            log_exception("Erro inesperado ao buscar mesorregioes")
             abort(500, description="Ocorreu um erro inesperado.")
 
     def post(self):
@@ -42,6 +43,10 @@ class MesorregioesResouce(Resource):
 
             db.session.add(nova_mesorregiao)
             db.session.commit()
+
+            
+            cache.delete_memoized(MesorregioesResouce.get)
+            logger.info(f"Cache invalidado após inserção de nova mesorregiao")
 
             logger.info(f"Nova Mesorregiao com codigo {nova_mesorregiao.codmesorregiao} cadastrada com sucesso")
             return marshal(nova_mesorregiao, tb_mesorregiao_fields), 201
@@ -55,6 +60,7 @@ class MesorregioesResouce(Resource):
             abort(500, description="Ocorreu um erro inesperado.")
 
 class MesorregiaoResource(Resource):
+    @cache.cached(timeout=3600, query_string=True)
     def get(self, codmesorregiao):
         logger.info(f"Get - Mesorregiao por código: {codmesorregiao}")
 
@@ -98,6 +104,11 @@ class MesorregiaoResource(Resource):
 
             db.session.commit()
 
+            
+            cache.delete_memoized(MesorregioesResouce.get)
+            cache.delete_memoized(MesorregiaoResource.get, codmesorregiao)
+            logger.info(f"Caches invalidados após atualização da mesorregiao {codmesorregiao}")
+
             logger.info(f"Mesorregiao com código {codmesorregiao} atualizada com sucesso.")
             return {"mensagem": "Mesorregiao atualizada com sucesso."}, 200
         
@@ -124,6 +135,11 @@ class MesorregiaoResource(Resource):
             
             db.session.delete(mesorregiao)
             db.session.commit()
+
+            
+            cache.delete_memoized(MesorregioesResouce.get)
+            cache.delete_memoized(MesorregiaoResource.get, codmesorregiao)
+            logger.info(f"Caches invalidados após deleção da mesorregiao {codmesorregiao}")
 
             logger.info(f"Mesorregiao com código {codmesorregiao} removida com sucesso.")
             return {"mensagem": "Mesorregiao removida com sucesso."}, 200
