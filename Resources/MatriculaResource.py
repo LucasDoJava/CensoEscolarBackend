@@ -15,6 +15,7 @@ class MatriculasPorUFResource(Resource):
         logger.info(f"Get - Matrículas por UF no ano {ano}")
 
         try:
+            
             resultados = db.session.execute(
                 db.select(
                     tb_instituicao.sigla,
@@ -25,8 +26,14 @@ class MatriculasPorUFResource(Resource):
                 .order_by(tb_instituicao.sigla)
             ).all()
 
+            
             dados = [
-                {"uf": sigla, "total_matriculas": int(total or 0)}
+                {
+                    "uf": sigla, 
+                    "total_matriculas": int(total or 0),
+                    "sigla": sigla,  
+                    "total": int(total or 0)  
+                }
                 for sigla, total in resultados
             ]
 
